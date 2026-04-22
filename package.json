@@ -1,5 +1,28 @@
 {
   "devDependencies": {
     "@types/express": "^5.0.6"
-  }
+  },
+  "name": "livecode-interview",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "undici-types": "^7.19.2"
+  },
+  "scripts": {
+    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "npm run start --prefix backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xsuuu/LiveCode-Interview.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Xsuuu/LiveCode-Interview/issues"
+  },
+  "homepage": "https://github.com/Xsuuu/LiveCode-Interview#readme"
 }
