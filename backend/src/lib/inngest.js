@@ -1,11 +1,11 @@
 import { Inngest } from 'inngest';
-import { connectDB } from './db';
+import { connectDB } from './db.js';
 import User from '../models/User.js';
 
 export const inngest = new Inngest({ id: 'CodeMeet' });
 
 const syncUser = inngest.createFunction(
-  { id: 'sync-user' },
+  { id: 'sync-user', retries: 3 },
   { event: 'clert/user.created' },
   async ({ event }) => {
     await connectDB();
@@ -20,7 +20,11 @@ const syncUser = inngest.createFunction(
       profileImage: image_url,
     };
 
-    await User.create(newUser);
+    await User.findOneAndUpdate(
+      { clerkId: id },
+      { $set: userData },
+      { upsert: true, new: true },
+    );
 
     //to do sth else
   },
