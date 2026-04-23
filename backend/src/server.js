@@ -1,9 +1,13 @@
 // console.log("hey from the server");
 
+import dns from 'dns';
+dns.setServers(['8.8.8.8', '8.8.4.4']);
+
 //const express = require("express")
 import express from 'express';
 import { ENV } from './lib/env.js';
 import path from 'path';
+import { connectDB } from './lib/db.js';
 
 // console.log(ENV.PORT);
 // console.log(ENV.DB_URL);
@@ -21,11 +25,22 @@ app.get('/books', (req, res) => {
 });
 
 //make our app ready for deployment
-if(ENV.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")))
-  app.get("/{*any}", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"))
-  })
+if (ENV.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+  app.get('/{*any}', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend', 'dist', 'index.html'));
+  });
 }
 
-app.listen(ENV.PORT, () => console.log('Server is running on port:', ENV.PORT));
+const startServer = async () => {
+  try {
+    await connectDB();
+    app.listen(ENV.PORT, () =>
+      console.log('Server is running on port:', ENV.PORT),
+    );
+  } catch {
+    console.error('😭 Error starting the server', error);
+  }
+};
+
+startServer();
