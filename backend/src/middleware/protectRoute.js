@@ -1,4 +1,4 @@
-import { clerkMiddleware } from '@clerk/express';
+import { clerkMiddleware, getAuth } from '@clerk/express';
 
 import User from '../models/User.js';
 
@@ -6,7 +6,7 @@ export const protectRoute = [
   clerkMiddleware(),
   async (req, res, next) => {
     try {
-      const clerkId = req.auth().userId;
+      const { userId: clerkId } = getAuth(req);
       if (!clerkId)
         return res.status(401).json({ msg: 'Unauthorized = invalid token' });
 
