@@ -5,7 +5,7 @@
 ## 技术栈
 
 - **框架**: React 19 (Vite) + Node.js (Express)
-- **语言**: TypeScript / JavaScript
+- **语言**: JavaScript
 - **数据库**: MongoDB + Mongoose
 - **认证**: Clerk (OAuth / 邮箱登录)
 - **状态管理**: TanStack Query + Stream SDK
