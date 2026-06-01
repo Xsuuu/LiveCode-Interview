@@ -2,6 +2,8 @@
 
 面向技术面试场景的实时协作平台，支持视频通话、在线代码编辑与远程执行，解决面试会话加入时序与音视频稳定性问题。
 
+> 在线体验：[https://codemeet-app.up.railway.app](https://codemeet-app.up.railway.app) 
+
 ## 技术栈
 
 - **框架**: React 19 (Vite) + Node.js (Express)
